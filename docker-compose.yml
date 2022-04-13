@@ -10,8 +10,6 @@ services:
       MARIADB_USER: 'appuser'
       MARIADB_PASSWORD: 'apppassword'
     volumes:
-      - data:/var/lib/mariadb
+      - ./data:/var/lib/mysql
     ports:
       - "3306:3306"
-volumes:
-  data:
