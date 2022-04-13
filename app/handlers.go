@@ -3,6 +3,7 @@ package app
 import (
 	"encoding/json"
 	"encoding/xml"
+	"github.com/sandeepchugh/profileapi/service"
 	"net/http"
 )
 
@@ -12,11 +13,17 @@ type Customer struct {
 	ZipCode string `json: "zipCode"`
 }
 
-func getAllCustomers(writer http.ResponseWriter, request *http.Request) {
-	customers := []Customer{
-		{"Ashish", "New Delhi", "110075"},
-		{"Rob", "New Delhi", "110075"},
-	}
+type CustomerHandler struct {
+	service service.CustomerService
+}
+
+func (ch *CustomerHandler) getAllCustomers(writer http.ResponseWriter, request *http.Request) {
+	//customers := []Customer{
+	//	{"Ashish", "New Delhi", "110075"},
+	//	{"Rob", "New Delhi", "110075"},
+	//}
+
+	customers, _ := ch.service.GetAllCustomers()
 
 	if request.Header.Get("Content-Type") == "application/xml" {
 		writer.Header().Add("Content-Type", "application/xml")
