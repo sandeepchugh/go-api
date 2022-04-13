@@ -1,0 +1,17 @@
+version: '2'
+services:
+  db:
+    container_name: mariadb
+    restart: always
+    image: mariadb:latest
+    environment:
+      MARIADB_ROOT_PASSWORD: 'rootpass' # TODO: Change this
+      MARIADB_DATABASE: 'customers'
+      MARIADB_USER: 'appuser'
+      MARIADB_PASSWORD: 'apppassword'
+    volumes:
+      - data:/var/lib/mariadb
+    ports:
+      - "3306:3306"
+volumes:
+  data:
